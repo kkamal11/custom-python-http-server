@@ -1,4 +1,5 @@
 import os
+import time
 import datetime
 
 from .config import SERVER_NAME, VERSION
@@ -11,6 +12,7 @@ class Colors:
     RED = "\033[91m"
     RESET = "\033[0m"
     BOLD = "\033[1m"
+    MAROON = "\033[35m"
 
 
 def print_banner(host, port, workers):
@@ -21,6 +23,11 @@ def print_banner(host, port, workers):
     print(f"{Colors.CYAN}Workers:{Colors.RESET}     {workers}")
     print(f"{Colors.CYAN}Master PID:{Colors.RESET}  {os.getpid()}")
     print(f"{Colors.CYAN}Mode:{Colors.RESET}        Prefork (sync)")
+    print("─" * 58)
+    print(
+        f"{Colors.YELLOW}🌐 Serving application on http://{host}:{port}{Colors.RESET}\n"
+    )
+    print(f"{Colors.YELLOW}❌ Press Ctrl+C to stop the server{Colors.RESET}")
     print("─" * 58)
     print()
 
@@ -39,9 +46,6 @@ def log(message, level="INFO"):
     print(f"{color}[{now}] [PID {pid}] [{level}] {message}{Colors.RESET}")
 
 
-import time
-
-
 def print_request_log(client_addr, request, status_code, response_size, duration):
     now = time.strftime("%H:%M:%S")
 
@@ -53,6 +57,6 @@ def print_request_log(client_addr, request, status_code, response_size, duration
     print(
         f"[{now}] {ip} "
         f'"{method} {path} {version}" '
-        f"{status_code} {response_size} "
+        f"{Colors.MAROON}{status_code}{Colors.RESET} {response_size} bytes "
         f"{duration:.2f}ms"
     )
