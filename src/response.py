@@ -4,6 +4,10 @@ class HTTPResponse:
         self.headers = headers or []
         self.body = body
 
+    @property
+    def status_code(self):
+        return int(self.status.split()[0])
+
     def build(self) -> bytes:
         response_line = f"HTTP/1.1 {self.status}\r\n"
 
@@ -14,9 +18,4 @@ class HTTPResponse:
         for key, value in self.headers:
             header_lines += f"{key}: {value}\r\n"
 
-        return (
-            response_line.encode()
-            + header_lines.encode()
-            + b"\r\n"
-            + self.body
-        )
+        return response_line.encode() + header_lines.encode() + b"\r\n" + self.body

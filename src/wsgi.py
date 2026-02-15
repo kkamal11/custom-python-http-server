@@ -27,7 +27,7 @@ class WSGIHandler:
             body=body,
         )
 
-        return response.build()
+        return response
 
     def _build_environ(self, request):
         environ = {}

@@ -1,12 +1,14 @@
 import sys
+import argparse
 import importlib
+from textwrap import dedent
 from src.server import HTTPServer
 
 
+VERSION = "0.1.0"
+
+
 def load_app(app_path: str):
-    """
-    Load WSGI app from string like: module:app
-    """
     if ":" not in app_path:
         raise ValueError("App must be in format module:callable")
 
@@ -15,17 +17,87 @@ def load_app(app_path: str):
     module = importlib.import_module(module_name)
     app = getattr(module, app_name)
 
-    return app, app_name
+    if not callable(app):
+        raise TypeError(f"{app_name} is not callable")
+
+    return app
+
+
+def main():
+    description = dedent(
+        """
+        Mini Gunicorn-like WSGI Server
+
+        The app should be provided as:
+            module:callable
+
+        Example:
+            examples.flask_app:app
+    """
+    )
+
+    epilog = dedent(
+        """
+        Examples:
+
+          Run with default settings:
+            python main.py examples.flask_app:app
+
+          Run on all interfaces:
+            python main.py examples.flask_app:app --host 0.0.0.0
+
+          Run on custom port:
+            python main.py examples.flask_app:app --port 9000
+
+          Run with 4 workers:
+            python main.py examples.flask_app:app --workers 4
+    """
+    )
+
+    parser = argparse.ArgumentParser(
+        prog="mini-gunicorn",
+        description=description,
+        epilog=epilog,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+
+    parser.add_argument("app", help="WSGI app in format module:callable")
+
+    parser.add_argument(
+        "--host", default="127.0.0.1", help="Bind host (default: 127.0.0.1)"
+    )
+
+    parser.add_argument(
+        "--port", type=int, default=8000, help="Bind port (default: 8000)"
+    )
+
+    parser.add_argument(
+        "--workers", type=int, default=1, help="Number of worker processes (default: 1)"
+    )
+
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {VERSION}",
+    )
+
+    args = parser.parse_args()
+
+    try:
+        app = load_app(args.app)
+    except Exception as e:
+        print(f"Error loading app: {e}")
+        sys.exit(1)
+
+    server = HTTPServer(
+        host=args.host,
+        port=args.port,
+        app=app,
+        workers=args.workers,
+    )
+
+    server.serve_forever()
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python3 main.py module:app")
-        sys.exit(1)
-
-    app_path = sys.argv[1]
-    app, app_name = load_app(app_path)
-    print(f"Starting application '{app_name}' on custom server")
-
-    server = HTTPServer(app=app)
-    server.serve_forever()
+    main()
