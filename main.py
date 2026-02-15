@@ -3,6 +3,7 @@ import argparse
 import importlib
 from textwrap import dedent
 from src.server import HTTPServer
+from src.cli import log
 from src.config import VERSION, DEFAULT_HOST, DEFAULT_PORT, DEFAULT_WORKERS
 
 version = VERSION
@@ -18,6 +19,7 @@ def load_app(app_path: str):
     app = getattr(module, app_name)
 
     if not callable(app):
+        log(f"App {app_name} is not callable", level="ERROR")
         raise TypeError(f"{app_name} is not callable")
 
     return app
