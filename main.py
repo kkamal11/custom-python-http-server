@@ -3,9 +3,9 @@ import argparse
 import importlib
 from textwrap import dedent
 from src.server import HTTPServer
+from src.config import VERSION, DEFAULT_HOST, DEFAULT_PORT, DEFAULT_WORKERS
 
-
-VERSION = "0.1.0"
+version = VERSION
 
 
 def load_app(app_path: str):
@@ -64,15 +64,18 @@ def main():
     parser.add_argument("app", help="WSGI app in format module:callable")
 
     parser.add_argument(
-        "--host", default="127.0.0.1", help="Bind host (default: 127.0.0.1)"
+        "--host", default=DEFAULT_HOST, help="Bind host (default: 127.0.0.1)"
     )
 
     parser.add_argument(
-        "--port", type=int, default=8000, help="Bind port (default: 8000)"
+        "--port", type=int, default=DEFAULT_PORT, help="Bind port (default: 8000)"
     )
 
     parser.add_argument(
-        "--workers", type=int, default=1, help="Number of worker processes (default: 1)"
+        "--workers",
+        type=int,
+        default=DEFAULT_WORKERS,
+        help="Number of worker processes (default: 1)",
     )
 
     parser.add_argument(

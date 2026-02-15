@@ -1,7 +1,7 @@
 import os
 import datetime
 
-VERSION = "0.1.0"
+from .config import SERVER_NAME, VERSION
 
 
 class Colors:
@@ -15,13 +15,13 @@ class Colors:
 
 def print_banner(host, port, workers):
     print()
-    print(f"{Colors.GREEN}{Colors.BOLD}🚀 Custom Server v{VERSION}{Colors.RESET}")
-    print("─" * 48)
+    print(f"{Colors.GREEN}{Colors.BOLD}🚀 {SERVER_NAME} v{VERSION}{Colors.RESET}")
+    print("─" * 58)
     print(f"{Colors.CYAN}Bind:{Colors.RESET}        http://{host}:{port}")
     print(f"{Colors.CYAN}Workers:{Colors.RESET}     {workers}")
     print(f"{Colors.CYAN}Master PID:{Colors.RESET}  {os.getpid()}")
     print(f"{Colors.CYAN}Mode:{Colors.RESET}        Prefork (sync)")
-    print("─" * 48)
+    print("─" * 58)
     print()
 
 

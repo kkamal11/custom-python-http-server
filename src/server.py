@@ -4,10 +4,20 @@ import socket
 from src.request import HTTPRequest
 from src.wsgi import WSGIHandler
 from src.cli import print_banner, log, print_request_log
+from src.config import (
+    VERSION,
+    DEFAULT_HOST,
+    DEFAULT_PORT,
+    DEFAULT_WORKERS,
+    DEFAULT_BACKLOG,
+)
 
 
 class HTTPServer:
-    def __init__(self, host="127.0.0.1", port=8000, app=None, workers=1):
+
+    def __init__(
+        self, host=DEFAULT_HOST, port=DEFAULT_PORT, app=None, workers=DEFAULT_WORKERS
+    ):
         self.host = host
         self.port = port
         self.app = app
@@ -17,7 +27,7 @@ class HTTPServer:
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.bind((self.host, self.port))
-        server_socket.listen(128)
+        server_socket.listen(DEFAULT_BACKLOG)
 
         print_banner(self.host, self.port, self.workers)
 
