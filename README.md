@@ -1,6 +1,6 @@
-# 🚀 MiniGunicorn – Custom WSGI HTTP Server
+# 🚀 Custom WSGI HTTP Server - Python
 
-A minimal Gunicorn-like WSGI HTTP server built from scratch in Python.
+A minimal WSGI HTTP server built from scratch in Python.
 
 This project demonstrates:
 
