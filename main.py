@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     app_path = sys.argv[1]
     app, app_name = load_app(app_path)
-    print(f"Starting application {app_name} on custom server")
+    print(f"Starting application '{app_name}' on custom server")
 
     server = HTTPServer(app=app)
     server.serve_forever()
