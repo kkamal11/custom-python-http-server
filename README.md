@@ -18,6 +18,7 @@ This project demonstrates:
 
 ## 📦 Project Structure
 
+```java
 custom-server/
 │
 ├── src/
@@ -34,9 +35,7 @@ custom-server/
 ├── main.py             # CLI entry point
 ├── requirements.txt
 └── README.md
-
-
----
+```
 
 ## 🛠 Installation
 
