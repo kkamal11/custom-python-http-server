@@ -1,6 +1,6 @@
 import os
 
-SERVER_NAME = "My Custom WSGI Server"
+SERVER_NAME = "My Minimal Gunicorn Custom WSGI Server"
 VERSION = "0.1.0"
 DESCRIPTION = "Minimal Gunicorn-like custom WSGI Server"
 

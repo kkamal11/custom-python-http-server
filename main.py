@@ -26,7 +26,7 @@ def load_app(app_path: str):
 def main():
     description = dedent(
         """
-        Mini Gunicorn-like WSGI Server
+        Mini Gunicorn-like Custom WSGI Server
 
         The app should be provided as:
             module:callable
