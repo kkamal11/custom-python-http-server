@@ -13,7 +13,7 @@ settings.configure(
 
 
 def home(request):
-    return HttpResponse("Hello from Django via MiniGunicorn!")
+    return HttpResponse("Hello from Django via custom HTTP server!")
 
 
 urlpatterns = [
