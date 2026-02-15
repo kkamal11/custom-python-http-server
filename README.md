@@ -87,7 +87,6 @@ To run with a custom WSGI app:
 python main.py module:callable_app
 ```
 
-
 ## 🧪 Example Flask App
 
 ```python
@@ -99,6 +98,28 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return "Hello from Custom MiniGunicorn!"
+```
+
+## 🧪 Example Django App
+
+```python
+from django.conf import settings
+from django.core.wsgi import get_wsgi_application
+from django.http import HttpResponse
+from django.urls import path
+settings.configure(
+    DEBUG=True,
+    SECRET_KEY="super-secret-key-1234567890$@qwertyuiop",
+    ROOT_URLCONF=__name__,
+    ALLOWED_HOSTS=["*"],
+    MIDDLEWARE=[],
+)
+def home(request):
+    return HttpResponse("Hello from Django via MiniGunicorn!")
+urlpatterns = [
+    path("", home),
+]
+app = get_wsgi_application()
 ```
 
 ## 📊 Access Logs
