@@ -160,7 +160,8 @@ This is a minimal implementation for educational purposes. It lacks many feature
 - Extensive logging options
 - Performance optimizations
 - Security hardening
-I made it it as a learning tool or a starting point for building a more robust server!
+
+**I made it it as a learning tool and a starting point for building a more robust server and get to know how does a production WSGI server work!**
 
 ## 🧑‍💻 Author
 
