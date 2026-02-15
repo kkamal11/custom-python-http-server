@@ -53,9 +53,9 @@ def print_request_log(client_addr, request, status_code, response_size, duration
     method = request.method
     path = request.path
     version = request.http_version
-
+    pid = os.getpid()
     print(
-        f"[{now}] {ip} "
+        f"[{now}] [PID {pid}] {ip} "
         f'"{method} {path} {version}" '
         f"{Colors.MAROON}{status_code}{Colors.RESET} {response_size} bytes "
         f"{duration:.2f}ms"
