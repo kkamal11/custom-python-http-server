@@ -43,8 +43,8 @@ custom-server/
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/mini-gunicorn.git
-cd mini-gunicorn
+git clone git@github.com:kkamal11/custom-python-http-server.git
+cd root_directory
 ```
 
 ### 2️⃣ Create Virtual Environment
