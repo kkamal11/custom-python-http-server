@@ -97,7 +97,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello from Custom MiniGunicorn!"
+    return "Hello from Custom HTTP Server app!"
 ```
 
 ## 🧪 Example Django App
@@ -115,7 +115,7 @@ settings.configure(
     MIDDLEWARE=[],
 )
 def home(request):
-    return HttpResponse("Hello from Django via MiniGunicorn!")
+    return HttpResponse("Hello from Django via Custom HTTP Server!")
 urlpatterns = [
     path("", home),
 ]
