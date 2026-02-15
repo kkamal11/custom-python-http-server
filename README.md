@@ -18,7 +18,7 @@ This project demonstrates:
 
 ## 📦 Project Structure
 
-```java
+```bash
 custom-server/
 │
 ├── src/
