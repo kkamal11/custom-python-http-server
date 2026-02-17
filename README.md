@@ -61,6 +61,12 @@ pip install -r requirements.txt
 
 ---
 
+## ❓ Help
+
+```bash
+python3 main.py --help
+```
+
 ## 🚀 Usage
 
 To run with Default Settings:
